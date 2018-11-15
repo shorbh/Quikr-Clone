@@ -7,24 +7,18 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.loginDao;
+
 /**
  *
  * @author Rajender kumar
  */
-public class LoginServletValidater1 extends HttpServlet {
+public class LogOutValidator extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,24 +32,10 @@ public class LoginServletValidater1 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String s = request.getParameter("email");
-        String s1 = request.getParameter("psw");
-        loginDao ld = new loginDao();
-        
-        if(ld.validat(s,s1)){
-            
-                      
-            HttpSession session = request.getSession();
-            session.setAttribute("email", s);
-            RequestDispatcher rd = request.getRequestDispatcher("/UserHome.jsp");
-            rd.forward(request,response);
-        }
-        else{
-            System.out.println("enter correct credential details");
+        HttpSession session=request.getSession();  
+            session.invalidate();
             RequestDispatcher rd = request.getRequestDispatcher("/login1.html");
             rd.forward(request,response);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

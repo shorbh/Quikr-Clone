@@ -3,10 +3,6 @@
     <welcome-file-list>
         <welcome-file>HomePage.html</welcome-file>
     </welcome-file-list>
-    <!--<servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>controller.LoginServlet</servlet-class>
-    </servlet>-->
     <servlet>
         <servlet-name>SignupServlet</servlet-name>
         <servlet-class>controller.SignupServlet</servlet-class>
@@ -19,10 +15,10 @@
         <servlet-name>LoginServletValidater1</servlet-name>
         <servlet-class>controller.LoginServletValidater1</servlet-class>
     </servlet>
-    <!--<servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>-->
+    <servlet>
+        <servlet-name>LogOutValidator</servlet-name>
+        <servlet-class>controller.LogOutValidator</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignupServlet</servlet-name>
         <url-pattern>/SignupServlet</url-pattern>
@@ -34,6 +30,10 @@
     <servlet-mapping>
         <servlet-name>LoginServletValidater1</servlet-name>
         <url-pattern>/LoginServletValidater1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogOutValidator</servlet-name>
+        <url-pattern>/LogOutValidator</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

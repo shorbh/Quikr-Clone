@@ -78,9 +78,11 @@ body{
                   <li><a>
                       <%=
                            request.getSession().getAttribute("email").toString()
-	                    
                       %>
                       </a></li>
+                      <li><a class ="active" href="LogOutValidator">LogOut</a></li>
+                      <% response.setHeader("Cache-Control","no-cache,no-store,must-revalidate"); %>
+                      
 		  <li style="float:right"><a href="#about">About</a></li>
 		  <li style="float:right"><a href="#contact">Contact</a></li>
 		</ul>
