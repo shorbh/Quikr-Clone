@@ -46,7 +46,7 @@ public class LoginServletValidater1 extends HttpServlet {
         if(ld.validat(s,s1)){
             HttpSession session = request.getSession();
             session.setAttribute("email", s);
-            RequestDispatcher rd = request.getRequestDispatcher("/HomePage.html");
+            RequestDispatcher rd = request.getRequestDispatcher("/UserHome.jsp");
             rd.forward(request,response);
         }
         else{
