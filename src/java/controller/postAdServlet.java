@@ -6,25 +6,25 @@
 package controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.loginDao;
+import javax.servlet.http.Part;
+
 /**
  *
  * @author Rajender kumar
  */
-public class LoginServletValidater1 extends HttpServlet {
+@MultipartConfig(maxFileSize = 16177216)
+public class postAdServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,22 +38,39 @@ public class LoginServletValidater1 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url="jdbc:mysql://localhost:3306/quikr?useSSL=false&verifyServerCertificate=false&allowMultiQueries=true";
         PrintWriter out = response.getWriter();
-        String s = request.getParameter("email");
-        String s1 = request.getParameter("psw");
-        loginDao ld = new loginDao();
-        if(ld.validat(s,s1)){
-            
-                      
-            HttpSession session = request.getSession();
-            session.setAttribute("email", s);
-            RequestDispatcher rd = request.getRequestDispatcher("/UserHome.jsp");
-            rd.forward(request,response);
-        }
-        else{
-            out.println("<script>alert(enter correct credential details);</script>");
-            RequestDispatcher rd = request.getRequestDispatcher("/login1.html");
-            rd.forward(request,response);
+        int result =0;
+        Connection con = null;
+        Part part = request.getPart("fileselect");
+        System.out.println("hello");
+        if(part != null){
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection(url,Myaccount.uname,Myaccount.pwd);
+                PreparedStatement ps = con.prepareStatement("insert into postad values(?,?,?,?,?,?,?)" );
+                InputStream is = part.getInputStream();
+                ps.setString(1,request.getParameter("category"));
+                ps.setString(2,request.getParameter("title"));
+                ps.setString(3,request.getParameter("disc"));
+                ps.setBlob(4,is);
+                ps.setString(5,request.getParameter("name"));
+                ps.setString(6,request.getParameter("mobile"));
+                ps.setString(7,request.getParameter("email"));
+                
+                result = ps.executeUpdate();
+                if(result > 0)
+                {
+                    String s = (String)request.getAttribute("fileselect");
+                    request.setAttribute("fileselect",s);
+                    RequestDispatcher rd = request.getRequestDispatcher("/new.jsp");
+                    rd.forward(request,response);
+                }
+                
+            }
+            catch(Exception e){
+                out.println(e);
+            }
         }
     }
 

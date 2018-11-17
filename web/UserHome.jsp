@@ -80,7 +80,7 @@ body{
                            request.getSession().getAttribute("email").toString()
                       %>
                       </a></li>
-                      <li><a class ="active" href="LogOutValidator">LogOut</a></li>
+                      <li><a class ="active" href="login1.html">LogOut</a></li>
                       <% response.setHeader("Cache-Control","no-cache,no-store,must-revalidate"); %>
                       
 		  <li style="float:right"><a href="#about">About</a></li>
@@ -91,7 +91,7 @@ body{
 		<h1 style="display:inline">QUIKR - </h1><h4 style="display:inline">An Online Buying and Selling Platform.!</h4>
 		<form style = "display: inline;float:right;margin:20px;" method="get">
 				 <a href="post-ad1.html " style="text-decoration:none;font-weight: bold;font-size:20px;">Post An Ad</a>
-			</form>
+</form>
 	</div>
 
 	<div id="indexcontentborder">

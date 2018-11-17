@@ -19,6 +19,14 @@
         <servlet-name>LogOutValidator</servlet-name>
         <servlet-class>controller.LogOutValidator</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>postAdServlet</servlet-name>
+        <servlet-class>controller.postAdServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>showImageServlet</servlet-name>
+        <servlet-class>controller.showImageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignupServlet</servlet-name>
         <url-pattern>/SignupServlet</url-pattern>
@@ -34,6 +42,14 @@
     <servlet-mapping>
         <servlet-name>LogOutValidator</servlet-name>
         <url-pattern>/LogOutValidator</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>postAdServlet</servlet-name>
+        <url-pattern>/postAdServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showImageServlet</servlet-name>
+        <url-pattern>/showImageServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
