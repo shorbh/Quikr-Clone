@@ -37,6 +37,7 @@ public class LoginServletValidater1 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String s = request.getParameter("email");
@@ -45,7 +46,7 @@ public class LoginServletValidater1 extends HttpServlet {
         if(ld.validat(s,s1)){
             
                       
-            HttpSession session = request.getSession();
+           
             session.setAttribute("email", s);
             RequestDispatcher rd = request.getRequestDispatcher("/UserHome.jsp");
             rd.forward(request,response);

@@ -10,6 +10,7 @@ package controller;
  * @author Rajender kumar
  */
 public interface Myaccount {
+    public final static String url = "jdbc:mysql://localhost:3306/quikr?useSSL=false&verifyServerCertificate=false&allowMultiQueries=true";
     public final static String uname = "root";
     public final static String pwd = "ssinghal18692";
 }

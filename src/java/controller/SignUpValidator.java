@@ -35,8 +35,9 @@ public class SignUpValidator extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         String url = "jdbc:mysql://localhost:3306/quikr?useSSL=false&verifyServerCertificate=false&allowMultiQueries=true";
-        System.out.println("hello world");
+        //System.out.println("hello world");
         try{
             
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -45,7 +46,8 @@ public class SignUpValidator extends HttpServlet {
             ps.setString(1,request.getParameter("email"));
             ps.setString(2,request.getParameter("psw"));
             ps.setString(3,request.getParameter("psw-repeat"));
-           ps.executeUpdate();
+            ps.executeUpdate();
+            out.print("window.alert(\"successfully  uploaded the image\")");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login1.html");
             dispatcher.forward(request, response);
         }

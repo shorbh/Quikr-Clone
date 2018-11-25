@@ -40,12 +40,10 @@ public class showImageServlet extends HttpServlet {
         try{
            Connection con = DriverManager.getConnection(url,Myaccount.uname,Myaccount.pwd);
            PreparedStatement ps = con.prepareStatement("select * from postad where name=?");
-           ps.setString(1,"rohan");
+           ps.setString(1,"razi");
            ResultSet rs = ps.executeQuery();
            if(rs.next()){
-
-               Blob blob;
-               blob = rs.getBlob("fileselect");
+               Blob blob = rs.getBlob("image");
                byte byteArray[] = blob.getBytes(1,(int)blob.length());
                response.setContentType("image/gif");
                OutputStream os = response.getOutputStream();

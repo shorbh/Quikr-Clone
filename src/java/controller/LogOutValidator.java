@@ -32,10 +32,10 @@ public class LogOutValidator extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session=request.getSession();  
+        HttpSession session=request.getSession(); 
+        session.removeAttribute("email");
             session.invalidate();
-            RequestDispatcher rd = request.getRequestDispatcher("/login1.html");
-            rd.forward(request,response);
+            response.sendRedirect("login1.html");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

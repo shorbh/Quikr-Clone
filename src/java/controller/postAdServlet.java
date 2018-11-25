@@ -38,7 +38,7 @@ public class postAdServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url="jdbc:mysql://localhost:3306/quikr?useSSL=false&verifyServerCertificate=false&allowMultiQueries=true";
+        String url="jdbc:mysql://localhost:3306/quikr?useSSL=false&allowPublicKeyRetrieval=true&verifyServerCertificate=false&allowMultiQueries=true";
         PrintWriter out = response.getWriter();
         int result =0;
         Connection con = null;
@@ -46,10 +46,12 @@ public class postAdServlet extends HttpServlet {
         System.out.println("hello");
         if(part != null){
             try{
+               
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection(url,Myaccount.uname,Myaccount.pwd);
                 PreparedStatement ps = con.prepareStatement("insert into postad values(?,?,?,?,?,?,?)" );
-                InputStream is = part.getInputStream();
+                InputStream is = 
+                        part.getInputStream();
                 ps.setString(1,request.getParameter("category"));
                 ps.setString(2,request.getParameter("title"));
                 ps.setString(3,request.getParameter("disc"));
@@ -60,11 +62,11 @@ public class postAdServlet extends HttpServlet {
                 
                 result = ps.executeUpdate();
                 if(result > 0)
-                {
-                    String s = (String)request.getAttribute("fileselect");
-                    request.setAttribute("fileselect",s);
-                    RequestDispatcher rd = request.getRequestDispatcher("/new.jsp");
-                    rd.forward(request,response);
+                {out.print("window.alert(\"successfully  uploaded the image\")");
+                    //String s = (String)request.getAttribute("fileselect");
+                    //request.setAttribute("fileselect",s);
+                   response.sendRedirect("userHome.jsp");
+                    //rd.forward(request,response);
                 }
                 
             }
