@@ -16,6 +16,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modal.signUp;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
+
 
 /**
  *
@@ -35,25 +43,20 @@ public class SignUpValidator extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String url = "jdbc:mysql://localhost:3306/quikr?useSSL=false&verifyServerCertificate=false&allowMultiQueries=true";
-        //System.out.println("hello world");
-        try{
-            
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(url,Myaccount.uname,Myaccount.pwd);
-            PreparedStatement ps = con.prepareStatement("insert into registration values(?,?,?)");
-            ps.setString(1,request.getParameter("email"));
-            ps.setString(2,request.getParameter("psw"));
-            ps.setString(3,request.getParameter("psw-repeat"));
-            ps.executeUpdate();
-            out.print("window.alert(\"successfully  uploaded the image\")");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login1.html");
-            dispatcher.forward(request, response);
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        signUp s = new signUp(request.getParameter("email"),request.getParameter("psw"),request.getParameter("psw-repeat"));
+        
+        Configuration con = new Configuration();
+        con.configure("hibercfg/hibernate.cfg.xml");
+        /*ServiceRegistry reg;
+        reg = new ServiceRegistryBuilder().applySettings(con.getProperties()).buildServiceRegistry();*/
+        SessionFactory sf = con.buildSessionFactory();
+        Session session = sf.openSession();
+        Transaction t = session.beginTransaction();
+        session.save(s);
+        t.commit();
+        session.close();
+        sf.close();
+        response.sendRedirect("login1.html");
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

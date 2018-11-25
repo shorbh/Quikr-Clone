@@ -1,5 +1,5 @@
 
-package model;
+package modal;
 import java.util.*;
   
 public class otpgen 

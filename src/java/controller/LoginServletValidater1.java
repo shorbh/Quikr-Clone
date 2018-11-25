@@ -1,25 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller;
+import modal.*;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.loginDao;
+
 /**
  *
  * @author Rajender kumar
@@ -37,24 +29,26 @@ public class LoginServletValidater1 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String s = request.getParameter("email");
-        String s1 = request.getParameter("psw");
-        loginDao ld = new loginDao();
-        if(ld.validat(s,s1)){
-            
-                      
-           
-            session.setAttribute("email", s);
-            RequestDispatcher rd = request.getRequestDispatcher("/UserHome.jsp");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+           String email = request.getParameter("email");
+           String pwd = request.getParameter("psw");
+           login l = new login(email,pwd);
+           loginDao ld = new loginDao();
+           if(ld.search(l)){
+               HttpSession session = request.getSession();
+               session.setAttribute("email",email);
+               /*response.sendRedirect("home.jsp");*/
+               RequestDispatcher rd = request.getRequestDispatcher("/UserHome.jsp");
             rd.forward(request,response);
-        }
-        else{
-            out.println("<script>alert(enter correct credential details);</script>");
+               
+           }
+           else{
+               out.println("<script>alert(enter correct credential details);</script>");
             RequestDispatcher rd = request.getRequestDispatcher("/login1.html");
             rd.forward(request,response);
+           }
         }
     }
 
@@ -96,5 +90,5 @@ public class LoginServletValidater1 extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
+
