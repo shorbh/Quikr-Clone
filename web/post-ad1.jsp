@@ -22,7 +22,7 @@
 				<a href="HomePage.html"><span>QU</span>IKR</a>
 			</div>
 			<div class="header-right">
-			<a class="account" href="userHome.jsp">My Account</a>
+			<a class="account" href="UserHome.jsp">My Account</a>
 			</div>
 			</div>
 	

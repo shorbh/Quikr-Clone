@@ -18,7 +18,7 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="model.otpgen"%>
+<%@page import="modal.otpgen"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -41,20 +41,23 @@
                 String otp = og.gen();
                 session.setAttribute("otp",otp);
                             String result;
-   String from = "ssinghal.cse16@chitkarauniversity.edu.in";
-   String host = "localhost";
-   Properties properties = System.getProperties();
+   final String from = "saurabhsinghal998@gmail.com";
+   //String host = "localhost";
+   final String pass = "ssinghal18692";
+   Properties properties = new Properties();
    properties.put("mail.smtp.starttls.enable", "true");
     properties.put("mail.smtp.auth", "true");
      properties.put("mail.smtp.host", "smtp.gmail.com");
+     properties.put("mail.smtp.socketFactory.port","587");
+     properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
      properties.put("mail.smtp.port", "587");
    
 
-   properties.setProperty("mail.smtp.host", host);
-   Session mailSession = Session.getDefaultInstance(properties,new javax.mail.Authenticator() { protected PasswordAuthentication getPasswordAuthentication() { return new PasswordAuthentication(username,password);}});
+   //properties.setProperty("mail.smtp.host", host);
+   Session mailSession = Session.getInstance(properties,new javax.mail.Authenticator() { protected PasswordAuthentication getPasswordAuthentication() { return new PasswordAuthentication(from,pass);}});
    try {
       MimeMessage message = new MimeMessage(mailSession);
-      message.setFrom(new InternetAddress(from));
+      //message.setFrom(new InternetAddress(from));
       message.addRecipient(Message.RecipientType.TO,
                                new InternetAddress(email));
       message.setSubject("Reset Quikr Password code");

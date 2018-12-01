@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rajender%20kumar/Desktop/QUIKR/web/forgotp.html</file>
-            <file>file:/C:/Users/Rajender%20kumar/Desktop/QUIKR/src/java/controller/changePassword.java</file>
-            <file>file:/C:/Users/Rajender%20kumar/Desktop/QUIKR/src/java/model/otpgen.java</file>
+            <file>file:/C:/Users/Rajender%20kumar/Desktop/QUIKR/src/java/controller/postAdServlet.java</file>
             <file>file:/C:/Users/Rajender%20kumar/Desktop/QUIKR/web/otp.jsp</file>
+            <file>file:/C:/Users/Rajender%20kumar/Desktop/QUIKR/src/java/controller/LoginServletValidater1.java</file>
+            <file>file:/C:/Users/Rajender%20kumar/Desktop/QUIKR/src/java/hibercfg/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/Rajender%20kumar/Desktop/QUIKR/src/java/modal/login.hbm.xml</file>
         </group>
     </open-files>
 </project-private>
